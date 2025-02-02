@@ -40,12 +40,6 @@ fun FlowContent.ProfileView(userSession: UserSession) {
                                         alt = "Profile picture preview"
                                     }
                                 }
-                                input(classes = "block w-full text-lg text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-lg file:font-semibold file:bg-gray-700 file:text-gray-200 hover:file:bg-gray-600") {
-                                    type = InputType.file
-                                    id = "profile-picture"
-                                    name = "profile-picture"
-                                    accept = "image/*"
-                                }
                             }
                         }
                     }

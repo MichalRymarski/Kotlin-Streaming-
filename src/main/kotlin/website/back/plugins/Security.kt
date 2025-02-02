@@ -2,7 +2,6 @@ package website.back.plugins
 
 import io.ktor.server.application.*
 import io.ktor.server.sessions.*
-import kotlin.collections.set
 
 data class UserSession(
     var nick: String,
@@ -18,13 +17,12 @@ data class UserSession(
 
     private fun generateColorFromEmail(email: String): String {
         val hash = email.hashCode()
-        // Convert to hex and take the last 6 digits
         val color = "#" + Integer.toHexString(hash).takeLast(6)
         return color
     }
 
     fun getInitial(): Char {
-        return email.first().uppercaseChar()
+        return nick.first().uppercaseChar()
     }
 }
 

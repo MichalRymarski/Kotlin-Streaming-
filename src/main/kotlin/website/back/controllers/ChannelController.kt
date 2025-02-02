@@ -148,6 +148,8 @@ private fun FlowContent.ChannelView(channelNick: String, channelEmail: String, v
                             attributes["hx-encoding"] = "multipart/form-data"
                             attributes["hx-target"] = "#videoGrid"
                             attributes["hx-swap"] = "outerHTML"
+                            attributes["hx-on"] = "htmx:afterRequest: this.reset()"
+
 
                             div {
                                 classes = setOf("mb-2")
@@ -180,7 +182,16 @@ private fun FlowContent.ChannelView(channelNick: String, channelEmail: String, v
                                     name = "image"
                                     accept = "image/*"
                                     classes =
-                                        setOf("block", "w-full", "text-xs", "border", "rounded", "text-white", "file:bg-customGray", "file:text-white")
+                                        setOf(
+                                            "block",
+                                            "w-full",
+                                            "text-xs",
+                                            "border",
+                                            "rounded",
+                                            "text-white",
+                                            "file:bg-customGray",
+                                            "file:text-white"
+                                        )
                                 }
                             }
 
@@ -199,10 +210,8 @@ private fun FlowContent.ChannelView(channelNick: String, channelEmail: String, v
                         +channelNick
                     }
                 }
-                div {
-                    id = "videoGrid"
-                    RenderVideoList(videos)
-                }
+
+                RenderVideoList(videos)
             }
         }
     }

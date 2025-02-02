@@ -52,7 +52,6 @@ class GoogleCloudStorageService(
         .service
 
     fun deleteVideo(fileName: String) {
-        // Make sure the fileName starts with "videos/" if that's your folder structure
         val blobId = BlobId.of(bucketName, if (fileName.startsWith("videos/")) fileName else "videos/$fileName")
         val deleted = storage.delete(blobId)
 

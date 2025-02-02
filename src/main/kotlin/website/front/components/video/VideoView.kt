@@ -4,15 +4,14 @@ import kotlinx.html.*
 import website.VideoObject
 import website.back.controllers.generateColorFromEmail
 import website.back.plugins.UserSession
-import website.front.components.shared.ChannelPill
+import website.front.components.shared.ClickableChannelPill
 import website.front.components.shared.HeaderLoggedIn
 import website.front.components.shared.HeaderNotLoggedIn
 import website.front.components.shared.MenuMovingSidebar
 import website.syntax_extensions.addContent
-import website.syntax_extensions.classes
 
 fun FlowContent.VideoView(videos: List<VideoObject>, userSession: UserSession?, currentVideo: VideoObject) {
-    div{
+    div {
         attributes["x-data"] = "{ sidebarOpen: false }"
         attributes["hx-preserve"] = "true"
 
@@ -33,19 +32,20 @@ fun FlowContent.VideoView(videos: List<VideoObject>, userSession: UserSession?, 
             HeaderNotLoggedIn()
         }
         MenuMovingSidebar()
-        PlayerAndSideContent(videos,currentVideo)
-    }}
+        PlayerAndSideContent(videos, currentVideo)
+    }
+}
 
 private fun FlowContent.PlayerAndSideContent(videos: List<VideoObject>, currentVideo: VideoObject) {
     div("w-full h-screen overflow-y-auto my-background relative") {
         attributes["x-data"] = "{ cinematicMode: false }"
-        div("container  p-4") {
+        div("container p-4") {
             attributes["x-bind:class"] = "{ 'left-32 absolute': !cinematicMode, 'mx-auto': cinematicMode }"
 
             div("flex flex-col lg:flex-row") {
                 attributes["x-bind:class"] = "{ 'lg:flex-col': cinematicMode }"
 
-                div("w-full") {
+                div("w-full flex flex-col") {
                     attributes["x-bind:class"] = "{ 'max-w-none': cinematicMode, 'max-w-4xl': !cinematicMode }"
                     attributes["x-data"] = "{ hovered: true }"
 
@@ -53,14 +53,14 @@ private fun FlowContent.PlayerAndSideContent(videos: List<VideoObject>, currentV
                         attributes["x-data"] = "videoPlayer"
                         attributes["x-bind:class"] = "{ 'fixed inset-0 z-50 bg-black flex flex-col': isFullscreen }"
 
-                        video(classes = "w-full h-full object-contain ") {
+                        video(classes = "w-full h-full object-contain") {
                             id = "video-player"
                             attributes["x-ref"] = "video"
                             attributes["x-on:click"] = "togglePlay"
                             attributes["x-on:timeupdate"] = "updateProgress"
                             attributes["x-on:loadedmetadata"] = "initializeVideo"
                             attributes["preload"] = "auto"
-                            attributes["controlslist"]="nodownload nofullscreen noremoteplayback"
+                            attributes["controlslist"] = "nodownload nofullscreen noremoteplayback"
 
                             source {
                                 src = currentVideo.videoUrl
@@ -75,17 +75,14 @@ private fun FlowContent.PlayerAndSideContent(videos: List<VideoObject>, currentV
                             attributes["x-on:mouseover"] = "hovered = true"
                             attributes["x-on:mouseleave"] = "hovered = false"
 
-
                             div("flex items-center justify-between text-white") {
                                 div("flex items-center space-x-4") {
                                     button(classes = "focus:outline-none") {
                                         attributes["x-on:click"] = "togglePlay"
                                         attributes["aria-label"] = "Play/Pause"
 
-                                        val playSvg =
-                                            """<svg x-show="!isPlaying" class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" /></svg>"""
-                                        val pauseSvg =
-                                            """<svg x-show="isPlaying" class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>"""
+                                        val playSvg = """<svg x-show="!isPlaying" class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" /></svg>"""
+                                        val pauseSvg = """<svg x-show="isPlaying" class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>"""
 
                                         unsafe { +playSvg }
                                         unsafe { +pauseSvg }
@@ -151,14 +148,16 @@ private fun FlowContent.PlayerAndSideContent(videos: List<VideoObject>, currentV
                             }
                         }
                     }
-                }
-                div("h-16"){
-                    attributes["x-show"] = "cinematicMode"
-                }
-                div (classes = classes()){
-                    ChannelPill(generateColorFromEmail(currentVideo.ownerEmail), currentVideo.ownerEmail.take(1))
-                    div(classes = classes("text-white text-xl")) {
-                        addContent(currentVideo.title)
+
+                    div("mt-4 mb-4 flex items-center space-x-4") {
+                        ClickableChannelPill(
+                            color = generateColorFromEmail(currentVideo.ownerEmail),
+                            initial = currentVideo.ownerEmail.take(1),
+                            email = currentVideo.ownerEmail
+                        )
+                        div(classes = "text-white text-xl") {
+                            addContent(currentVideo.title)
+                        }
                     }
                 }
 
@@ -173,7 +172,6 @@ private fun FlowContent.PlayerAndSideContent(videos: List<VideoObject>, currentV
                 }
             }
         }
-        div(classes = classes("h-32"))
+        div(classes = "h-32")
     }
 }
-

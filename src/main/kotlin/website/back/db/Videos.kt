@@ -1,10 +1,7 @@
 package website.back.db
 
-import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import website.VideoObject
 
@@ -90,6 +87,22 @@ fun getVideoById(id : Int) : VideoObject{
                     ownerEmail = it[Videos.userEmail]
                 )
             }.first()
+    }
+}
+
+fun getVideoByTitle(title : String) : List<VideoObject>{
+    return transaction {
+        Videos.selectAll()
+            .where { Videos.title.lowerCase() like "%${title.lowercase()}%" }
+            .map {
+                VideoObject(
+                    id = it[Videos.id].toString(),
+                    title = it[Videos.title],
+                    thumbnailUrl = it[Videos.thumbnailUrl],
+                    videoUrl = it[Videos.videoUrl],
+                    ownerEmail = it[Videos.userEmail]
+                )
+            }.take(20)
     }
 }
 

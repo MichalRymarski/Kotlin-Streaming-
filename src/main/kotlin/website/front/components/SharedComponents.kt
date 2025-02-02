@@ -13,7 +13,8 @@ const val menuIcon =
     "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" focusable=\"false\" aria-hidden=\"true\" style=\"pointer-events: none; display: inherit; width: 100%; height: 100%;\" fill=\"${Colors.text}\"><path d=\"M21 6H3V5h18v1zm0 5H3v1h18v-1zm0 6H3v1h18v-1z\"></path></svg>"
 const val signInIcon =
     "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" focusable=\"false\" aria-hidden=\"true\" style=\"pointer-events: none; display: inherit; width: 100%; height: 100%;\" fill=\"currentColor\"><path  d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 1c4.96 0 9 4.04 9 9 0 1.42-.34 2.76-.93 3.96-1.53-1.72-3.98-2.89-7.38-3.03A3.996 3.996 0 0016 9c0-2.21-1.79-4-4-4S8 6.79 8 9c0 1.97 1.43 3.6 3.31 3.93-3.4.14-5.85 1.31-7.38 3.03C3.34 14.76 3 13.42 3 12c0-4.96 4.04-9 9-9zM9 9c0-1.65 1.35-3 3-3s3 1.35 3 3-1.35 3-3 3-3-1.35-3-3zm3 12c-3.16 0-5.94-1.64-7.55-4.12C6.01 14.93 8.61 13.9 12 13.9c3.39 0 5.99 1.03 7.55 2.98C17.94 19.36 15.16 21 12 21z\"></path></svg>"
-const val youtubeLogo = """<svg xmlns="http://www.w3.org/2000/svg" id="yt-logo-updated-svg_yt9" class="external-icon" viewBox="0 0 90 20" focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;">
+const val youtubeLogo =
+    """<svg xmlns="http://www.w3.org/2000/svg" id="yt-logo-updated-svg_yt9" class="external-icon" viewBox="0 0 90 20" focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;">
             <svg id="yt-logo-updated_yt9" viewBox="0 0 90 20" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
                 <g>
                     <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #ff1a1a;"></path>
@@ -32,6 +33,20 @@ const val youtubeLogo = """<svg xmlns="http://www.w3.org/2000/svg" id="yt-logo-u
                 </g>
             </svg>
         </svg>"""
+
+const val bazinga = """
+    <svg width="257" height="62" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <filter height="200%" width="200%" y="-50%" x="-50%" id="svg_1_blur">
+   <feGaussianBlur stdDeviation="0.4" in="SourceGraphic"/>
+  </filter>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <text transform="matrix(1.07018 0 0 1 -48.9143 0)" stroke="#000" filter="url(#svg_1_blur)" xml:space="preserve" text-anchor="start" font-family="'Grandstander'" font-size="24" id="svg_1" y="40.2813" x="67.81927" stroke-width="1" fill="${Colors.text}">Kotlin Streaming</text>
+ </g>
+</svg>
+"""
 
 fun FlowContent.formInput(
     inputType: InputType,
@@ -166,9 +181,7 @@ fun FlowContent.ToggleSwitch(id: String, label: String, classes: String? = null)
 }
 
 
-
-
- fun FlowContent.SignInButton(signInIcon: String) {
+fun FlowContent.SignInButton(signInIcon: String) {
     button(
         classes = classes(
             "absolute top-3 right-8 mr-2 w-32 h-12 my-sign-in border-2",
@@ -192,10 +205,9 @@ fun FlowContent.ToggleSwitch(id: String, label: String, classes: String? = null)
 }
 
 
-
 fun SPAN.TagItem(tagList: List<String>) {
     for (tag in tagList) {
-        span(classes = classes("my-text","my-onBackground","block-inline", "rounded-lg", "text-sm", "px-4", "py-2", "cursor-pointer")) {
+        span(classes = classes("my-text", "my-onBackground", "block-inline", "rounded-lg", "text-sm", "px-4", "py-2", "cursor-pointer")) {
             attributes["x-on:click"] = "\$store.tag.setChosen('$tag')"
             attributes["x-bind:class"] = "{ 'chosen-tag': \$store.tag.chosen === '$tag','hover:bg-gray-600': \$store.tag.chosen !== '$tag'  }"
             addContent(tag)

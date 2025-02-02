@@ -1,9 +1,6 @@
 package website.front.components
 
-import kotlinx.html.FlowContent
-import kotlinx.html.div
-import kotlinx.html.main
-import kotlinx.html.span
+import kotlinx.html.*
 import website.VideoObject
 import website.back.plugins.UserSession
 import website.front.components.shared.HeaderLoggedIn
@@ -14,13 +11,14 @@ import website.syntax_extensions.classes
 fun FlowContent.Home(userSession: UserSession?, videos : List<VideoObject>) = div(classes = classes("relative h-screen my-background")) {
     attributes["x-data"] = "{ sidebarOpen: false }"
 
-    if(userSession != null) {
+    if (userSession != null) {
         HeaderLoggedIn(userSession)
     } else {
         HeaderNotLoggedIn()
     }
     VideoGrid(videos)
 }
+
 
 fun FlowContent.TagList(){
     span(classes = classes("top-0 w-full h-16 flex items-center space-x-4 justify-start sticky z-10")) {
@@ -30,9 +28,8 @@ fun FlowContent.TagList(){
 }
 
 fun FlowContent.VideoGrid(videos : List<VideoObject>) {
-    main(classes("mx-auto overflow-hidden h-full w-full relative flex flex-col")) {
-        attributes["x-bind:class"] = "{ 'pl-56': sidebarOpen, 'pl-20': !sidebarOpen }"
-
+    main(classes("mx-auto overflow-hidden h-full  w-full relative flex flex-col")) {
+        id = "videoGrid"
 
         div(classes = classes("overflow-y-auto h-full pt-10 pr-8 scrollbar-hide")) {
             div(classes = classes("grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-8 gap-x-6")) {

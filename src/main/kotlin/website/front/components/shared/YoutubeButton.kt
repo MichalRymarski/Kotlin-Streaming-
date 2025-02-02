@@ -4,13 +4,13 @@ import kotlinx.html.ButtonType
 import kotlinx.html.FlowContent
 import kotlinx.html.button
 import kotlinx.html.unsafe
-import website.front.components.youtubeLogo
+import website.front.components.bazinga
 import website.syntax_extensions.addContent
 import website.syntax_extensions.classes
 
 fun FlowContent.YoutubeButton() {
     button(
-        classes = classes("absolute top-6 left-16 w-32 h-6  flex items-center justify-center"),
+        classes = classes("absolute top-6 left-6 w-64 h-6  flex items-center justify-center"),
         type = ButtonType.button
     ) {
         attributes["hx-trigger"] = "click"
@@ -19,6 +19,6 @@ fun FlowContent.YoutubeButton() {
         attributes["hx-push-url"] = "true"
         attributes["hx-get"] = "/"
 
-        unsafe { addContent(youtubeLogo) }
+        unsafe { addContent(bazinga) }
     }
 }
