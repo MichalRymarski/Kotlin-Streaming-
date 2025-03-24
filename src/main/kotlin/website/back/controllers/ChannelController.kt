@@ -175,6 +175,7 @@ private fun FlowContent.ChannelView(channelNick: String, channelEmail: String, v
                                         "file:bg-customGray",
                                         "file:text-white"
                                     )
+
                                 }
 
                                 input(type = InputType.file) {
@@ -192,7 +193,9 @@ private fun FlowContent.ChannelView(channelNick: String, channelEmail: String, v
                                             "file:bg-customGray",
                                             "file:text-white"
                                         )
+
                                 }
+
                             }
 
                             button(type = ButtonType.submit) {

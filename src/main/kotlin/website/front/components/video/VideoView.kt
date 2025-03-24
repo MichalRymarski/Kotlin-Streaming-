@@ -39,6 +39,7 @@ fun FlowContent.VideoView(videos: List<VideoObject>, userSession: UserSession?, 
 private fun FlowContent.PlayerAndSideContent(videos: List<VideoObject>, currentVideo: VideoObject) {
     div("w-full h-screen overflow-y-auto my-background relative") {
         attributes["x-data"] = "{ cinematicMode: false }"
+
         div("container p-4") {
             attributes["x-bind:class"] = "{ 'left-32 absolute': !cinematicMode, 'mx-auto': cinematicMode }"
 
@@ -171,7 +172,7 @@ private fun FlowContent.PlayerAndSideContent(videos: List<VideoObject>, currentV
                     }
                 }
             }
+            div(classes = "h-32")
         }
-        div(classes = "h-32")
     }
 }

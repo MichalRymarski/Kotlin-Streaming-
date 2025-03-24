@@ -12,8 +12,6 @@ import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 import website.back.db.Users
 import website.back.db.Videos
-import website.back.db.migrateUsers
-import website.back.db.migrateVideos
 import website.back.plugins.Cors
 import website.back.plugins.configureRouting
 import website.back.plugins.configureSecurity
@@ -24,8 +22,8 @@ fun main(args : Array<String>) {
     KtorClient.init()
 
     setupDb()
-    migrateUsers()
-    migrateVideos()
+    //migrateUsers()
+    //migrateVideos()
 
     EngineMain.main(args)
 }

@@ -72,9 +72,6 @@ fun FlowContent.Login() {
                     }
                 }
 
-                a(href = "#", classes = classes("text-sm", "text-blue-600", "hover:underline")) {
-                    addContent("Forgot your password?")
-                }
             }
 
             a(href = "$API_LINK/register", classes = classes("text-sm", "text-blue-600", "hover:underline")) {
