@@ -106,6 +106,23 @@ fun getVideoByTitle(title : String) : List<VideoObject>{
     }
 }
 
+fun getRandom20VideosExcept(excludeId: Int): List<VideoObject> {
+    return transaction {
+        Videos.selectAll()
+            .where { Videos.id neq excludeId.toInt() }  // Exclude the specified video ID
+            .limit(20)
+            .map {
+                VideoObject(
+                    id = it[Videos.id].toString(),
+                    thumbnailUrl = it[Videos.thumbnailUrl],
+                    title = it[Videos.title],
+                    videoUrl = it[Videos.videoUrl],
+                    ownerEmail = it[Videos.userEmail]
+                )
+            }
+    }
+}
+
 fun getRandom20Videos() : List<VideoObject>{
     return transaction {
         Videos.selectAll().limit(20).map {
@@ -113,7 +130,7 @@ fun getRandom20Videos() : List<VideoObject>{
                 id = it[Videos.id].toString(),
                 thumbnailUrl = it[Videos.thumbnailUrl],
                 title = it[Videos.title],
-                videoUrl = it[Videos.videoUrl], // Ensure this column is selected
+                videoUrl = it[Videos.videoUrl],
                 ownerEmail = it[Videos.userEmail]
             )
         }

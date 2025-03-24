@@ -9,6 +9,7 @@ import kotlinx.html.body
 import kotlinx.html.id
 import kotlinx.html.script
 import website.back.db.getRandom20Videos
+import website.back.db.getRandom20VideosExcept
 import website.back.db.getVideoById
 import website.back.db.getVideoByTitle
 import website.back.plugins.UserSession
@@ -61,7 +62,6 @@ fun Routing.VideoController() {
     get("/video/{id}") {
         val videoID = call.parameters["id"]?.toIntOrNull()
         val userSession = call.sessions.get<UserSession>()
-        val videos = getRandom20Videos()
 
         if (videoID == null) { //TODO : Create a case when db fails to query for that
             call.respondHtml(status = HttpStatusCode.NoContent) {
@@ -74,6 +74,8 @@ fun Routing.VideoController() {
                 }
             }
         } else {
+            val videos = getRandom20VideosExcept(videoID)
+
             call.respondHtml(status = HttpStatusCode.OK) {
                 val currentVideo = getVideoById(videoID)
                 imports()
