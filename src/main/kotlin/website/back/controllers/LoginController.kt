@@ -26,9 +26,6 @@ fun Routing.LoginController() {
         call.request.headers.forEach { key, values ->
             println("Header: $key = ${values.joinToString()}")
         }
-
-        //    call.respondFile(File("D:\\intellij\\PROJEKTY\\KtorWebsite-HTMX-TAILWIND\\src\\main\\kotlin\\tailwind.html"))
-        //! THIS FOOKING WORKS !!!
         call.respondHtml(status = HttpStatusCode.OK) {
             imports()
 
@@ -77,7 +74,7 @@ private suspend fun PipelineContext<Unit, ApplicationCall>.handleLogin(
     val success = nick != null
 
     if (success) {
-        call.sessions.set(UserSession(nick!!, email))
+        call.sessions.set(UserSession(nick, email))
         call.response.cookies.append(
             Cookie(
                 name = "REMEMBER_ME",

@@ -25,7 +25,7 @@ import website.syntax_extensions.classes
 fun Routing.VideoController() {
 
     get("/video-grid") {
-        val title = call.request.queryParameters.get("title")
+        val title = call.request.queryParameters["title"]
         val userSession = call.sessions.get<UserSession>()
         println("${ANSI_GREEN} $title ${ANSI_RESET}")
 
@@ -63,7 +63,7 @@ fun Routing.VideoController() {
         val videoID = call.parameters["id"]?.toIntOrNull()
         val userSession = call.sessions.get<UserSession>()
 
-        if (videoID == null) { //TODO : Create a case when db fails to query for that
+        if (videoID == null) {
             call.respondHtml(status = HttpStatusCode.NoContent) {
                 imports()
 

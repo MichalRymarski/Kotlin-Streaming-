@@ -21,35 +21,13 @@ fun FlowContent.DropdownMenu(
 ) {
     div(classes = contentClasses(containerStyling, containerPlacement, containerTransition)) {
         id = "dropdown-menu"
+
         div(classes = classes("relative", "inline-block")) {
-            button(
-                classes = classes(
-                    containerSize, "py-2", "inline-flex", "items-center", "justify-center"
-                )
+            button(classes = classes(containerSize, "py-2", "inline-flex", "items-center", "justify-center")
             ) {
                 attributes["x-on:click"] = "isOpen = !isOpen"
             }
-            div(
-                classes = classes(
-                    "absolute",
-                    contentStyling,
-                    "mt-2",
-                    "py-2",
-                    "w-64",
-                    "shadow-lg",
-                    "z-10",
-                    "center",
-                    "rounded-md",
-                    "border",
-                    "border-gray-200",
-                    "transition-all",
-                    "transform",
-                    "scale-95",
-                    "origin-top-right",
-                    "right-0",
-                    "mt-2"
-                )
-            ) {
+            div(classes = classes("absolute", contentStyling, "mt-2", "py-2", "w-64", "shadow-lg", "z-10", "center", "rounded-md", "border", "border-gray-200", "transition-all", "transform", "scale-95", "origin-top-right", "right-0", "mt-2")) {
                 attributes["x-show"] = "isOpen"
                 attributes["x-transition:enter"] = "transition ease-out duration-150"
                 attributes["x-transition:enter-start"] = "opacity-0"
@@ -59,13 +37,8 @@ fun FlowContent.DropdownMenu(
                 attributes["x-transition:leave-end"] = "opacity-0"
                 id = "dropdownContent"
                 items.forEachIndexed { index, item ->
-                    div(
-                        classes = contentClasses(
-                            contentPlacement,
-                            contentTransition,
-                            contentSize,
-                            if (index != items.size - 1) "border-b border-gray-600" else "" // Add border between items except for the last one
-                        )
+                    div(classes = contentClasses(contentPlacement, contentTransition, contentSize,
+                        if (index != items.size - 1) "border-b border-gray-600" else "")
                     ) {
                         item()
                     }

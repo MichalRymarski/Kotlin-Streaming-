@@ -85,13 +85,13 @@ fun Routing.ChannelController(storageService: GoogleCloudStorageService) {
 
         multipart.forEachPart { part ->
             when (part) {
-                is PartData.FormItem -> { // Handle text input fields like title
+                is PartData.FormItem -> {
                     when (part.name) {
-                        "title" -> videoTitle = part.value // Extract the title value
+                        "title" -> videoTitle = part.value
                     }
                 }
 
-                is PartData.FileItem -> { // Handle file input fields like video and image
+                is PartData.FileItem -> {
                     when (part.name) {
                         "video" -> videoUrl = storageService.uploadVideo(part)
                         "image" -> thumbnailUrl = storageService.uploadImage(part)
@@ -110,14 +110,13 @@ fun Routing.ChannelController(storageService: GoogleCloudStorageService) {
         val success = handleVideoSave(userEmail, videoUrl, thumbnailUrl, videoTitle)
 
         if (success) {
-            val videos = getVideosForUser(userEmail) // Retrieve the updated list of videos
+            val videos = getVideosForUser(userEmail)
             call.respondHtml {
                 body {
                     RenderVideoList(videos)
                 }
             }
         } else {
-            // If saving the video record fails, respond with an error
             call.respond(HttpStatusCode.InternalServerError, "A problem occurred while saving the video. Please try again later.")
         }
     }

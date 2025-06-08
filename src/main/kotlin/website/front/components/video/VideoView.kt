@@ -7,7 +7,6 @@ import website.back.plugins.UserSession
 import website.front.components.shared.ClickableChannelPill
 import website.front.components.shared.HeaderLoggedIn
 import website.front.components.shared.HeaderNotLoggedIn
-import website.front.components.shared.MenuMovingSidebar
 import website.syntax_extensions.addContent
 
 fun FlowContent.VideoView(videos: List<VideoObject>, userSession: UserSession?, currentVideo: VideoObject) {
@@ -31,14 +30,16 @@ fun FlowContent.VideoView(videos: List<VideoObject>, userSession: UserSession?, 
         } else {
             HeaderNotLoggedIn()
         }
-        MenuMovingSidebar()
+       // MenuMovingSidebar()
         PlayerAndSideContent(videos, currentVideo)
     }
 }
 
 private fun FlowContent.PlayerAndSideContent(videos: List<VideoObject>, currentVideo: VideoObject) {
-    div("w-full h-screen overflow-y-auto my-background relative") {
+    div("w-full h-screen overflow-y-auto my-background relative"){
         attributes["x-data"] = "{ cinematicMode: false }"
+        id = "videoGrid"
+
 
         div("container p-4") {
             attributes["x-bind:class"] = "{ 'left-32 absolute': !cinematicMode, 'mx-auto': cinematicMode }"
