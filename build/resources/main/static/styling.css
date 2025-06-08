@@ -1,0 +1,97 @@
+
+:root {
+    --background-color: #0f0f0f;
+    --on-background-color: #2f2e2e;
+    --text-color: #e8e6e3;
+    --small-text-color:#aaaaaa;
+}
+
+.my-header {
+    background-color: var(--background-color);
+    height: 4.5rem;
+}
+
+.my-sidebar {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.my-sign-in {
+    border-color: #303030;
+    border-style: solid;
+    background-color: var(--background-color);
+}
+
+.my-background{
+    background-color: var(--background-color);
+}
+
+.my-onBackground {
+    background-color: var(--on-background-color);
+}
+
+.my-text{
+    color: var(--text-color);
+    font-family: "Roboto Light", sans-serif;
+    font-weight: 600;
+}
+
+.my-video-title{
+    color: var(--text-color);
+    font-family: "Roboto Light", sans-serif;
+    font-weight: 600;
+}
+
+.my-video-details{
+    color: var(--small-text-color);
+    font-family: "Roboto Light", sans-serif;
+    font-weight: 600;
+}
+
+.my-text.chosen-tag {
+    background-color: var(--text-color);
+    color: var(--on-background-color);
+}
+
+.my-searchButton {
+    border-color: #303030;
+    border-style: solid;
+    border-width: 1px;
+    border-left-width: 0;
+}
+
+.my-search {
+    border-color: #303030;
+    border-style: solid;
+    border-width: 1px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-weight: 500;
+    font-family: "Roboto Light", sans-serif;
+}
+
+.my-grid-box{
+    font-family: "Roboto Light", sans-serif;
+    font-weight: bold;
+    font-size: medium;
+    color: var(--text-color);
+    height: 19rem;
+}
+
+.my-grid{
+    padding-right: 2.5rem;
+}
+
+.my-rounded-box{
+    border-radius: 1.25rem
+}
+
+.fixed.inset-0 video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.my-interactive {
+    color: #3ea6ff;
+}
