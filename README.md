@@ -49,7 +49,7 @@ chmod +x ./gradlew              # Only if you're on Linux
 
 -----
 
-\<a name="polski"\>\</a\>
+<a name="polski"\>\</a\>
 
 ## 🇵🇱 Polski
 
